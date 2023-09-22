@@ -1,6 +1,7 @@
 const OpenAI = require("openai"),
   fs = require("fs"),
-  path = require("path");
+  path = require("path"),
+  async = require('async');
 
 require("dotenv").config();
 
@@ -13,8 +14,7 @@ const background = "You are Software Development Engineer in Test (SDET) with 10
   " TestNG and Gradle and now you are in charge of migrating those legacy frameworks to more reliable, scalable and maintainable" +
   " technologies such as Node.js, Javascript, and Playwright.";
 
-const migratePages = "I am going to share with you the next Java class, it was made using Page Object Model (POM). Could you adapt it to the syntax of"
-+ " Playwright and Javascript? The source code is the following: ";
+
 
 module.exports = {
   async createMessages(request) {
@@ -31,13 +31,26 @@ module.exports = {
     return messages;
   },
 
-  async readFileAsCode(filePath) {
+  /*async readFileAsCode(filePath) {
     try {
       let folderPath = path.join(filePath),
         validFolder = fs.readdirSync(folderPath);
-      async.each(validFolder, function (file) {
+      async.each(validFolder, async function (file) {
         let fileData = fs.readFileSync(path.join(__dirname, filePath + '/' + file), "utf-8");
+        let bodyMessage = migratePages + fileData;
+        let prompt = this.createMessages(bodyMessage);
+        let output = await generate(prompt);
+        await createOutputFile(file, output);
       });
+    } catch (error) {
+      throw new Error(`Error reading file: ${error}`);
+    }
+  },*/
+  async readFileAsCode(filePath, file) {
+    try {
+      let folder = path.join(filePath);
+      let fileData = fs.readFileSync(path.join(__dirname, folder + file), 'utf-8');
+      return fileData;
     } catch (error) {
       throw new Error(`Error reading file: ${error}`);
     }
