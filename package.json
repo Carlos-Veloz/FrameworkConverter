@@ -1,0 +1,24 @@
+{
+  "name": "frameworkmigrator",
+  "version": "1.0.0",
+  "description": "PoC to migrate a test automation framewok from a legacy technology to another version",
+  "main": "index.js",
+  "scripts": {
+    "generateCommands": "node src/genFolderStructure.js"
+  },
+  "keywords": [
+    "Wizeline",
+    "OpenAI",
+    "GenAI",
+    "Test",
+    "Framewok",
+    "Migrate"
+  ],
+  "author": "Carlos Veloz (carlos.veloz@wizeline.com)",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "openai": "^4.10.0",
+    "ora": "^7.0.1"
+  }
+}
