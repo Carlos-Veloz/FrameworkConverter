@@ -3,22 +3,28 @@ const {
   createMessages,
   generate,
   createOutputFile
-} = require("./chatgpt-api");
+} = require("./chatgpt-api"),
+  fs = require("fs"),
+  path = require("path"),
+  async = require('async');
 
-const path = "../pagesOld/";
-const file = "Base.java";
-const framework = "Dart";
+const pagesPath = "../pagesOld";
 
 const migratePages = "I am going to share with you the next Java class, it was made using Page Object Model (POM). Could you adapt it to the syntax of"
-+ " Playwright and Javascript? The source code is the following: ";
++ " Playwright? The source code is the following: ";
 
 (async () => {
   try {
-    const code = await readFileAsCode(path, file);
-    const userMsg = migratePages + code;
-    let prompt = await createMessages(userMsg);
-    let output = await generate(prompt);
-    await createOutputFile(file, output);
+    let folderPath = path.join(__dirname, pagesPath),
+      validFolder = fs.readdirSync(folderPath);
+    async.each(validFolder, async function (file) {
+      let fileData = fs.readFileSync(path.join(__dirname, pagesPath + '/' + file), "utf-8");
+      const userMsg = migratePages + fileData;
+      let prompt = await createMessages(userMsg);
+      let output = await generate(prompt);
+      let newName = file + ".js";
+      await createOutputFile(newName, output);
+    });
   } catch (error) {
     console.error(error);
   }

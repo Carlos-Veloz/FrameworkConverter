@@ -14,8 +14,6 @@ const background = "You are Software Development Engineer in Test (SDET) with 10
   " TestNG and Gradle and now you are in charge of migrating those legacy frameworks to more reliable, scalable and maintainable" +
   " technologies such as Node.js, Javascript, and Playwright.";
 
-
-
 module.exports = {
   async createMessages(request) {
     const messages = [
@@ -31,21 +29,6 @@ module.exports = {
     return messages;
   },
 
-  /*async readFileAsCode(filePath) {
-    try {
-      let folderPath = path.join(filePath),
-        validFolder = fs.readdirSync(folderPath);
-      async.each(validFolder, async function (file) {
-        let fileData = fs.readFileSync(path.join(__dirname, filePath + '/' + file), "utf-8");
-        let bodyMessage = migratePages + fileData;
-        let prompt = this.createMessages(bodyMessage);
-        let output = await generate(prompt);
-        await createOutputFile(file, output);
-      });
-    } catch (error) {
-      throw new Error(`Error reading file: ${error}`);
-    }
-  },*/
   async readFileAsCode(filePath, file) {
     try {
       let folder = path.join(filePath);
