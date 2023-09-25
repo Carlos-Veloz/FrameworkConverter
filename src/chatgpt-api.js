@@ -29,16 +29,6 @@ module.exports = {
     return messages;
   },
 
-  async readFileAsCode(filePath, file) {
-    try {
-      let folder = path.join(filePath);
-      let fileData = fs.readFileSync(path.join(__dirname, folder + file), 'utf-8');
-      return fileData;
-    } catch (error) {
-      throw new Error(`Error reading file: ${error}`);
-    }
-  },
-
   async generate(messages) {
     const spinner = (await import("ora"))
       .default("Please wait processing your request...")
@@ -61,12 +51,10 @@ module.exports = {
     }
   },
 
-  async createOutputFile(file, output) {
-    //path where unit test file is created
-    const outputFolder = "./output/";
-    let fileName = path.join(outputFolder + file);
+  async createOutputFile(folderName, name, content) {
+    let fileName = path.join(folderName + name);
     try {
-      fs.writeFileSync(fileName, output);
+      fs.writeFileSync(fileName, content);
       console.log(`Message written to file: ${fileName}`);
     } catch (error) {
       console.error(`Error writing to file: ${error}`);

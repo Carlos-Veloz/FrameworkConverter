@@ -1,5 +1,4 @@
 const { 
-  readFileAsCode,
   createMessages,
   generate,
   createOutputFile
@@ -9,9 +8,8 @@ const {
   async = require('async');
 
 const pagesPath = "../pagesOld";
-
-const migratePages = "I am going to share with you the next Java class, it was made using Page Object Model (POM). Could you adapt it to the syntax of"
-+ " Playwright? The source code is the following: ";
+const outputFolder = "./pagesNew/";
+const migratePages = "Could you adapt the following Java Class that uses Selenium and Page Object Model (POM) to the syntax of Playwright? The source code is the following:\n";
 
 (async () => {
   try {
@@ -23,7 +21,7 @@ const migratePages = "I am going to share with you the next Java class, it was m
       let prompt = await createMessages(userMsg);
       let output = await generate(prompt);
       let newName = file + ".js";
-      await createOutputFile(newName, output);
+      await createOutputFile(outputFolder, newName, output);
     });
   } catch (error) {
     console.error(error);

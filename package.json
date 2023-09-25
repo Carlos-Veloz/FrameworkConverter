@@ -1,11 +1,13 @@
 {
-  "name": "frameworkmigrator",
+  "name": "frameworkconverter",
   "version": "1.0.0",
-  "description": "PoC to migrate a test automation framewok from a legacy technology to another version",
+  "description": "Project that takes a test automation framewok from a legacy technology and converts it to a new one",
   "main": "index.js",
   "scripts": {
     "generateCommands": "node src/genFolderStructure.js",
-    "migratePages": "node src/migratePages.js"
+    "convertPages": "node src/convertPages.js",
+    "convertTests": "node src/convertTests.js",
+    "convertAll": "npm run generateCommands && npm run convertPages && npm run convertTests"
   },
   "keywords": [
     "Wizeline",
@@ -13,7 +15,7 @@
     "GenAI",
     "Test",
     "Framewok",
-    "Migrate"
+    "Convert"
   ],
   "author": "Carlos Veloz (carlos.veloz@wizeline.com)",
   "license": "ISC",
